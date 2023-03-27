@@ -16,28 +16,49 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "tb_produtos")
 public class Produto {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotBlank(message = "O nome do jogo é obrigatório!")
 	private String nomeJogo;
-	
+
 	@NotBlank(message = "A marca do jogo é obrigagtória!")
 	private String marca;
-	
+
 	@Digits(integer = 4, fraction = 2)
 	private BigDecimal preco;
-	
+
 	private String descricao;
-	
+
 	@NotBlank(message = "O console do jogo é obrigagtório!")
 	private String console;
-	
+
 	@ManyToOne
 	@JsonIgnoreProperties("produto")
-	private Categoria categoria; 
+	private Categoria categoria;
+
+	@ManyToOne
+	@JsonIgnoreProperties("produto")
+	private Usuario usuario;
+
+//Inserindo Getters and Setters
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 
 	public Long getId() {
 		return id;
@@ -86,7 +107,5 @@ public class Produto {
 	public void setConsole(String console) {
 		this.console = console;
 	}
-	
-	
 
 }
